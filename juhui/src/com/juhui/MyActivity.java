@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.juhui.ui.FragmentTest;
+import com.juhui.ui.MainFragment;
 import com.juhui.ui.LeftMenuFragment;
 import com.juhui.ui.RightMenuFragment;
 
@@ -53,9 +53,9 @@ public class MyActivity extends SlidingFragmentActivity {
 
         // set the Content View
         fragmentManager = new FragmentsManager(this, R.id.content_fragment);
-        fragmentManager.addFragment(Fragments.coupons.name(), FragmentTest.class, null);
-        fragmentManager.addFragment(Fragments.ecard.name(), FragmentTest.class, null);
-        fragmentManager.addFragment(Fragments.share.name(), FragmentTest.class, null);
+        fragmentManager.addFragment(Fragments.coupons.name(), MainFragment.class, null);
+        fragmentManager.addFragment(Fragments.ecard.name(), MainFragment.class, null);
+        fragmentManager.addFragment(Fragments.share.name(), MainFragment.class, null);
 
         // fragmentManager.addFragment(Fragments.mycard.name(),
         // EntityCardFragment.class, null);

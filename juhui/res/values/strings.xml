@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">juhui</string>
+
+    <string name="no_info">抱歉，没有相关信息</string>
+
 </resources>

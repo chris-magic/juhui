@@ -20,99 +20,102 @@ import android.telephony.TelephonyManager;
 
 /**
  * 设备信息，主要用于服务器端设备信息的统计
- * 
+ *
  * @author Steven.Luo
- * 
  */
 public class DeviceInformant {
 
-	private String osSystem;// 手机操作系统
-	private String osSystemVer;// 手机系统版本
+    private Context context;
+    private String osSystem;// 手机操作系统
+    private String osSystemVer;// 手机系统版本
 
-	private String deviceMode;// 设备型号
+    private String deviceMode;// 设备型号
 
-	private int versionCode;
-	private String versionName;
+    private int versionCode;
+    private String versionName;
 
-	private String countryCode;
-	private String deviceID;
-	private String deveiceImsi;// SIM卡的IMSI码
-	private String phoneNumber;
+    private String countryCode;
+    private String deviceID;
+    private String deveiceImsi;// SIM卡的IMSI码
+    private String phoneNumber;
 
-	private int screenHeight;
-	private int screenWidth;
-	private int densityDpi;
+    private int screenHeight;
+    private int screenWidth;
+    private int densityDpi;
 
-	public DeviceInformant(Context context) {
-		try {
-			osSystem = "Android";
-			osSystemVer = Build.VERSION.RELEASE;
-			deviceMode = Build.MODEL;
+    public DeviceInformant(Context context) {
+        try {
+            this.context = context;
+            osSystem = "Android";
+            osSystemVer = Build.VERSION.RELEASE;
+            deviceMode = Build.MODEL;
 
-			versionName = AndroidUtil.getVerName(context);
-			deviceID = AndroidUtil.getDeviceId(context);
-			deveiceImsi = AndroidUtil.getDeviceImsi(context);
-			phoneNumber = AndroidUtil.getPhoneNumber(context);
-			versionCode = AndroidUtil.getVerCode(context);
-			versionName = AndroidUtil.getVerName(context);
-			screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-			screenHeight = context.getResources().getDisplayMetrics().heightPixels;
-			densityDpi = context.getResources().getDisplayMetrics().densityDpi;
+            versionName = AndroidUtil.getVerName(context);
+            deveiceImsi = AndroidUtil.getDeviceImsi(context);
+            phoneNumber = AndroidUtil.getPhoneNumber(context);
+            versionCode = AndroidUtil.getVerCode(context);
+            versionName = AndroidUtil.getVerName(context);
+            screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+            screenHeight = context.getResources().getDisplayMetrics().heightPixels;
+            densityDpi = context.getResources().getDisplayMetrics().densityDpi;
 
-			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-			countryCode = tm == null ? "" : (tm.getSimCountryIso() == null ? "" : tm.getSimCountryIso().toUpperCase());
-		} catch (Exception e) {
-			e.printStackTrace();
-			Log.e("Device Info Error", e);
-		}
-	}
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            countryCode = tm == null ? "" : (tm.getSimCountryIso() == null ? "" : tm.getSimCountryIso().toUpperCase());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Device Info Error", e);
+        }
+    }
 
-	public String getDeveiceImsi() {
-		return deveiceImsi;
-	}
+    public String getDeveiceImsi() {
+        return deveiceImsi;
+    }
 
-	public String getOsSystem() {
-		return osSystem;
-	}
+    public String getOsSystem() {
+        return osSystem;
+    }
 
-	public String getOsSystemVer() {
-		return osSystemVer;
-	}
+    public String getOsSystemVer() {
+        return osSystemVer;
+    }
 
-	public String getDeviceMode() {
-		return deviceMode;
-	}
+    public String getDeviceMode() {
+        return deviceMode;
+    }
 
-	public int getVersionCode() {
-		return versionCode;
-	}
+    public int getVersionCode() {
+        return versionCode;
+    }
 
-	public String getVersionName() {
-		return versionName;
-	}
+    public String getVersionName() {
+        return versionName;
+    }
 
-	public String getCountryCode() {
-		return countryCode;
-	}
+    public String getCountryCode() {
+        return countryCode;
+    }
 
-	public String getDeviceID() {
-		return deviceID;
-	}
+    public String getDeviceID() {
+        if (deviceID == null)
+            deviceID = AndroidUtil.getDeviceId(context);
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+        return deviceID;
+    }
 
-	public int getScreenHeight() {
-		return screenHeight;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public int getScreenWidth() {
-		return screenWidth;
-	}
+    public int getScreenHeight() {
+        return screenHeight;
+    }
 
-	public int getDensityDpi() {
-		return densityDpi;
-	}
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getDensityDpi() {
+        return densityDpi;
+    }
 
 }
